@@ -10,5 +10,3 @@ A collection of AI and Machine Learning practicals completed as part of the GNIO
 ## How to Run
 ```bash
 python aipack02/AIPRACTICAL41.py
-
-### 0 to 5 star coder !
