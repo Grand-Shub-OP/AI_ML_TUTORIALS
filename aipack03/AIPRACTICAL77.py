@@ -12,5 +12,8 @@ print(t)
 plt.plot( t, t, 'r*-',
                 t,t+3, 'bs-',
                 t,t+6, 'go-',
+                t,t+9, 'ro',
+                t,t+9, 'k-',
                 markersize=7)
+
 plt.show()
