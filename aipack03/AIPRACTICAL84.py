@@ -11,7 +11,7 @@ plt.bar(m,n)
 plt.title("Raw Data")
 plt.show()
 
-plt.hist(n,bins=5)
+plt.hist(n,bins=50)
 plt.title("histogram")
 
 plt.show()
