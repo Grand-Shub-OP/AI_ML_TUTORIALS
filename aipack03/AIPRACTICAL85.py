@@ -1,19 +1,20 @@
 import matplotlib.pyplot as plt
-x1= [1,2,3,4,5]
-y1= [2,3,2,3,4]
 
-x2= [2,3,4]
-y2= [5,5,5]
+x1 = [1, 2, 3, 4, 5]
+y1 = [2, 3, 2, 3, 4]
 
-x3= [1,2,3,4,5]
-y3= [6,8,7,8,7]
+x2 = [2, 3, 4]
+y2 = [5, 5, 5]
 
-plt.scatter(x1,y1)
-plt.scatter(x2,y2,marker='v',colour='r')
-plt.scatter(x3,y3)
+x3 = [1, 2, 3, 4, 5]
+y3 = [6, 8, 7, 8, 7]
 
-forx,y in zip (x1,y1):
- plt.text(x,y+1, str(y))
+plt.scatter(x1, y1)
+plt.scatter(x2, y2, marker='v', color='r')
+plt.scatter(x3, y3, marker='^', color='m')
 
- plt.title('scatter Plot example')
- plt.show()
+for x, y in zip(x1, y1):
+    plt.text(x, y + 0.1, str(y))
+
+plt.title("Scatter Plot Example")
+plt.show()
