@@ -17,6 +17,7 @@ ax.bar3d(x, y, z, dx, dy, dz, color='b')
 ax.set_xlabel('x axis')
 ax.set_ylabel('y axis')
 ax.set_zlabel('z axis')
+
 plt.title("3D Bar Chart Example")
 plt.tight_layout()
 plt.show()
