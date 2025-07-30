@@ -1,22 +1,18 @@
-import pandas as pd
 import numpy as np
-
-print("numpy matrix = \n\n", np.random.randn(6,4))
-
-df = pd.DataFrame(np.random.randn(6,4),
-                  index = pd.date_range('20190101', periods=6, freq='D'),
-                  columns = ['A','B','C','D'] )
+import pandas as pd
 
 
-print("Only one column access: ")
-print(df.A)
-print("\n\n")
-print(df['B'])
-print("\n\n")
-print(df['D'])
+df = pd.DataFrame(
+    np.random.randn(6, 4),
+    index=pd.date_range(start='20190101', periods=6, freq='D'),
+    columns=['A', 'B', 'C', 'D']
+)
 
 print("\n\n")
-print(df['2019-01-01' : '2019-01-03'])
-
+print(df.loc['2019-01-06'])
+dates = pd.date_range(start='20190101', periods=6, freq='D')
+print(df.loc[dates[0]])
 print("\n\n")
-print(df[0:3])
+print(df.loc[: , ['A','D']])
+print("\n\n")
+print(df.loc['2019-01-04' , ['A','D']])
