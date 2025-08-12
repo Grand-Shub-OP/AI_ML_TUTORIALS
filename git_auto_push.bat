@@ -1,9 +1,23 @@
 @echo off
-cd /d "%~dp0"
-git checkout main
-git pull --rebase
+echo ===================================
+echo  Adding all files to Git...
+echo ===================================
 git add .
-git commit -m "Auto commit on %date% %time%"
-git push
-pause
 
+echo.
+echo ===================================
+echo  Committing the changes...
+echo ===================================
+git commit -m "Auto-commit on %date% %time%"
+
+echo.
+echo ===================================
+echo  Pushing to GitHub...
+echo ===================================
+git push
+
+echo.
+echo ===================================
+echo  All done!
+echo ===================================
+pause
