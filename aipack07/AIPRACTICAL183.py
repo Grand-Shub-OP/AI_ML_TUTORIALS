@@ -1,51 +1,54 @@
-#Practical Implementatin of LinearRegression using sklearn
-#-----------------------------------------------------
-import warnings
-warnings.filterwarnings(action="ignore")
-
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-def get_training_data(filename):
-    dataframe = pd.read_csv(filename)
-    print( dataframe )
-    x_parameters = [ ]
-    y_parameters = [ ]
+# Importing the dataset
+data = pd.read_csv('LinearRegressionPoly_Data.csv')
+print(data)
+print(data.shape)    #(7,2)
+X = data.iloc[ : , 0:1].values    # [ rows , cols ]
+y = data.iloc[ : , 1].values      # [ rows , cols ]
+print("X.shape = ", X.shape , "\n X=\n" , X )
+print("y.shape = ", y.shape , "\n y=" , y )
 
-    for  single_sqare_feet, single_price  in zip(  dataframe['square_feet'] , dataframe['price'] ):
-        x_parameters.append( [single_sqare_feet]  )
-        y_parameters.append(    single_price      )
+lin = LinearRegression()
+lin.fit(X, y)  # estimate the parameters of the model
 
-    #Once we got the data, return it to main program
-    return x_parameters, y_parameters
+# Predictions
+y_dash = lin.predict(X)
 
-def train_linear_model(x_parameters , y_parameters, quest_value ):
-    #create  Linear Regression Object
-    regr = LinearRegression()
-    regr.fit(x_parameters, y_parameters)    #   m & c   # Algo has been trained by fit()
-    predicted_ans = regr.predict( [[quest_value]]  )  # quest_value--->700
-    print("Output from machine = ", predicted_ans)
+# Plot the data points
+plt.scatter(X, y, color='blue')      # original points
+plt.scatter(X, y_dash, color='m')    # predicted points
 
-    print("After Training via sklearn: Model Parameters")
-    print("m = ", regr.coef_ )   #m
-    print("c = ", regr.intercept_ )  #c
-    print("sklearn generated Model :   y  = ", regr.coef_, " *  x  + ", regr.intercept_)
-    plt.scatter(x_parameters , y_parameters,    color="m", marker="o")
-    all_predicted_Y = regr.predict( x_parameters  )
-    plt.scatter(x_parameters , all_predicted_Y, color="b", marker="o")
-    plt.plot(x_parameters , all_predicted_Y, color="g")
-    plt.scatter(quest_value, predicted_ans, color="r")
-    plt.show()
+# Plot regression line
+plt.plot(X, y_dash, color='red')
 
-def startAIAlgorithm():
-    #Collect the trainig data form external csv data file.
-    x , y = get_training_data('LR_House_price.csv')
-    print("Formatted Training Data : " )
-    print("x = ", x )
-    print("y = ", y )
-    question_value = 700    #This is the question
-    train_linear_model(x , y, question_value )
+# Labels and title
+plt.title('Linear Regression')
+plt.xlabel('Engine Temperature')
+plt.ylabel('Engine Pressure')
 
-if __name__  ==   "__main__" :
-    startAIAlgorithm()
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+poly = PolynomialFeatures(degree=8)
+X_poly = poly.fit_transform(X)
+print('X = \n', X)
+print('X_poly = \n', X_poly)
+
+lin2 = LinearRegression()
+lin2.fit(X_poly, y)
+
+plt.scatter(X, y, color='blue')
+y_pred = lin2.predict(X_poly)
+plt.plot(X, y_pred, color='red')
+plt.title('Polynomial Regression')
+plt.xlabel('Engine Temperature')
+
+# Show plot
+plt.show()
+
+print("LinearRegression: ", lin.predict([[110.0]]))
+print("PolyRegression: ", lin2.predict(poly.fit_transform([[110.0]])))

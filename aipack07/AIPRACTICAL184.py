@@ -1,54 +1,56 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-
-# Importing the dataset
-data = pd.read_csv('LinearRegressionPoly_Data.csv')
-print(data)
-print(data.shape)    #(7,2)
-X = data.iloc[ : , 0:1].values    # [ rows , cols ]
-y = data.iloc[ : , 1].values      # [ rows , cols ]
-print("X.shape = ", X.shape , "\n X=\n" , X )
-print("y.shape = ", y.shape , "\n y=" , y )
-
-lin = LinearRegression()
-lin.fit(X, y)  # estimate the parameters of the model
-
-# Predictions
-y_dash = lin.predict(X)
-
-# Plot the data points
-plt.scatter(X, y, color='blue')      # original points
-plt.scatter(X, y_dash, color='m')    # predicted points
-
-# Plot regression line
-plt.plot(X, y_dash, color='red')
-
-# Labels and title
-plt.title('Linear Regression')
-plt.xlabel('Engine Temperature')
-plt.ylabel('Engine Pressure')
-
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
+import numpy as np
 import matplotlib.pyplot as plt
 
-poly = PolynomialFeatures(degree=8)
-X_poly = poly.fit_transform(X)
-print('X = \n', X)
-print('X_poly = \n', X_poly)
+df = pd.read_csv('insurance_data2.csv')
+print( df.head() )
 
-lin2 = LinearRegression()
-lin2.fit(X_poly, y)
+X = df.iloc[ : , 0:1].values
+#           row, col
+Y = df.iloc[:, 1].values
+print(X)
+print(Y)
 
-plt.scatter(X, y, color='blue')
-y_pred = lin2.predict(X_poly)
-plt.plot(X, y_pred, color='red')
-plt.title('Polynomial Regression')
-plt.xlabel('Engine Temperature')
-
-# Show plot
+plt.title("Insurance data")
+plt.xlabel("Age")
+plt.ylabel("Insure or Not ")
+plt.scatter(X,Y)
 plt.show()
 
-print("LinearRegression: ", lin.predict([[110.0]]))
-print("PolyRegression: ", lin2.predict(poly.fit_transform([[110.0]])))
+n = len(X)
+
+m_x = np.mean(X)
+m_y = np.mean(Y)
+
+SS_xy = np.sum(X*Y) - n * m_x * m_y
+SS_xx = np.sum(X*X) - n * m_x * m_x
+
+m = SS_xy / SS_xx
+print("Value of m = ", m)
+
+c = m_y   -   m * m_x
+print("Value of c = ", c)
+
+print("\nModel :   y  = ", m, " *  X  + ", c)
+
+y_predicted = m * X +  c
+print(y_predicted)
+
+
+plt.title("Insurance data")
+plt.xlabel("Age")
+plt.ylabel("Insured or not")
+plt.scatter(X,Y)   # Printing original historical data
+plt.plot(X, y_predicted,  "ro-") #Print the best file line for the given data
+plt.show()
+
+import math
+def get_sigmoid(z):
+    return 1 / (1 + np.power( math.e,-z))
+
+plt.title("Insurance Data")
+plt.xlabel("Age")
+plt.ylabel("Insured or Not")
+plt.scatter(X,Y,color='b',s=150)
+plt.plot(X, get_sigmoid(y_predicted),'ro-')
+plt.show()
