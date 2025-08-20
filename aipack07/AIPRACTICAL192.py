@@ -18,7 +18,7 @@ import pandas as pd
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 # Step 2: Load dataset
-df = pd.read_csv("customers_LDA1.csv")
+df = pd.read_csv("customers_LDA2.csv")
 print("Dataset:\n", df)
 
 # Step 3: Define features and target for training
@@ -31,16 +31,20 @@ lda.fit(X, y) # Corrected case for 'y'
 
 # Step 5: Make prediction
 #Example: Predict for a customer (Age=30 , Salary=32000)
+
 age = int(input("Enter the age : "))
 salary = int(input("Enter the Salary : "))
+
 sample=[[age,salary]]
 prediction = lda.predict(sample)
 
 result = None
 if prediction[0]==1 :
-    result = "buy"
+    result = "Will Purchase"
 else :
-    result = "not buy"
+    result = "Wont Purchase"
 
 # Corrected print statement to show the result
-print(f"\nPrediction for Age {age} & salary {salary}:", result)
+print(f"\nPrediction for Age {age} & salary {salary}\n:", result)
+
+
