@@ -3,7 +3,7 @@ import re
 
 # --- Configuration ---
 # This should be the folder containing your practical files.
-TARGET_DIR = ('aipack07')
+TARGET_DIR = ('aipack08')
 
 
 # -------------------
